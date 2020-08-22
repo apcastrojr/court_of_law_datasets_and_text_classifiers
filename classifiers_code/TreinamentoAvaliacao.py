@@ -1,6 +1,3 @@
-#By Antonio Pires de Castro Jr
-#apcastrojr
-#April/2020
 class TreinamentoAvaliacao:
   import sys
   import numpy as np
@@ -59,6 +56,14 @@ class TreinamentoAvaliacao:
     clf.fit(dataset_array, label_array)
     return clf.predict(data_teste)
 
+  def knn(self, dataset_array, label_array, data_teste):
+    from sklearn.neighbors import KNeighborsClassifier
+
+    #analise 2 resultados
+    clf = KNeighborsClassifier(n_neighbors=3)
+    clf.fit(dataset_array, label_array)
+    return clf.predict(data_teste)
+
   def avaliar_acuracia(self, array_predicao, array_label_corretos):
     acuracia=cont=0
     for i in array_predicao:
@@ -94,6 +99,8 @@ class TreinamentoAvaliacao:
           resultado_predicao = ta.mlp(dataset_array,label_array,data_teste)
        elif metodo_predicao == "svm":
           resultado_predicao = ta.svm(dataset_array,label_array,data_teste)
+       elif metodo_predicao == "knn":
+          resultado_predicao = ta.knn(dataset_array,label_array,data_teste)
 
        if resultado_predicao == []:
          print("***************************************")
